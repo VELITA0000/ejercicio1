@@ -8,7 +8,6 @@ const PORT = 3000;
 
 const app = express();
 
-
 console.log('Ejemplo 1 sin poner en la ruta el nombre del archivo index:', index);
 console.log('Ejemplo 2 poniendo la ruta con el nombre del archivo:', ejemplo);
 
