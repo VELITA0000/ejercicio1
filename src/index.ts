@@ -7,9 +7,10 @@ import routes from './app/routes';
 import swaggerJsDoc from 'swagger-jsdoc';
 import { setup, serve } from 'swagger-ui-express';
 import swaggerOptions from './../swagger.config';
+import { dbConnect } from './database';
 
-import { ejemplo } from './app/ejemplo2/ejemplo'
-import { index } from './app/ejemplo1'
+import { ejemplo } from './app/ejemplo2/ejemplo';
+import { index } from './app/ejemplo1';
 
 const PORT = process.env.PORT || 3000;
 
@@ -28,6 +29,10 @@ app.get('', (req, res) => {
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/swagger', serve, setup(swaggerDocs));
 
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+dbConnect().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+  });
+}).catch(() => {
+  console.log('Error al conectarse a la base de datos')
+})
