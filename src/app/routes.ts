@@ -8,5 +8,4 @@ const router = Router();
 router.use(json());
 router.use('/auth', authRoutes);
 router.use('/users', userRoutes);
-
 export default router;
