@@ -1,0 +1,23 @@
+Hash vs Encriptado
+En el hash tenemos un factor que modifica el valor y ya no se conoce, si se quiere validar hasheamos el input y comparamos el hash
+En el encriptado se transforma el valor y tenemos un factor para transformarlo y poder leerlo
+
+Con Hash se guarda con un token los datos de un usuario en la base de datos pero lo vuelve mas lento, solo hay un login 
+JWT encriptamos con el token tenemos el user id pero estamos limitados al control de ciertas cosas del usuario como el login
+
+Refresh token:
+Los tokens expiran, con cierto tiempo te saca de la sesion, para evitar refrescar el token cuando si se esta usando hacemos
+Refresh
+
+El middleware tiene 3 funciones, a diferencia de los otros que tienen res y req, el middleware no sabe a donde vas, sino es 
+una puerta hacia otro lugar que se define con la funcion next()
+
+parametros:
+?query: req.query estos parametros siempre son texto
+de ruta: req.params /usuarios/1
+payload: req.bodygti
+
+localhost:3000/isers?token=12345&paginado=false
+
+
+mongodb+srv://server_test:server_test@myapp.b3sl1up.mongodb.net/

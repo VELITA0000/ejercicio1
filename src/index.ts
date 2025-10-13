@@ -41,7 +41,7 @@ console.log("Database: ", database);
       { id: 1, nombre: "pablo" },
       { id: 2, nombre: "juan" }
     ]
-  });
+  }); 
 });
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
