@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { getUsers } from "./controller";
 import { authMiddleware } from '../middlewares/auth';
+import { uploadProfilePic } from "./controller";
+import { uploadMiddleware } from "../middlewares/upload";
 
 const router = Router ();
 
@@ -22,7 +24,35 @@ const router = Router ();
  *        description: success
  *      401:
  *        description: missing token
+ * 
+ * /users/profilepic:
+ *  post:
+ *    tags: [users]
+ *    description: adjuntar imagen de perfil
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        multipart/form-data:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              image:
+ *                type: string
+ *                format: binary
+ *                description: imagen de perfil a subir
+ *    responses:
+ *      200:
+ *        description: imagen subida exitosamente
+ *      400:
+ *        description: error al subir la imagen
+ *      401:
+ *        description: token inválido o faltante
 */
-router.get('/', authMiddleware, getUsers)
 
+router.get('', authMiddleware, getUsers)
+// users/profilepic/
+router.post('/profilepic', uploadMiddleware.single('image') , uploadProfilePic); // single: un solo campo un solo archivo
+// array: archivos distintos un solo campo
+// field: archivos distintos varios campos
+// °En postman en Body  se pone form-data y e pone como campo el archivo
 export default router;

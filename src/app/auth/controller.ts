@@ -7,5 +7,5 @@ export function login(req: Request, res: Response) {
 
 export function signup(req: Request, res: Response) {
     console.log(req.body);
-    res.send();
+    res .send();
 }
