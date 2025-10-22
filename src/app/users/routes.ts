@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getUsers } from "./controller";
+import { getUsers, showUploadProfilePicForm } from "./controller";
 import { authMiddleware } from '../middlewares/auth';
 import { uploadProfilePic } from "./controller";
 import { uploadMiddleware } from "../middlewares/upload";
@@ -51,8 +51,11 @@ const router = Router ();
 
 router.get('', authMiddleware, getUsers)
 // users/profilepic/
+router.get('profilepic', showUploadProfilePicForm);
 router.post('/profilepic', uploadMiddleware.single('image') , uploadProfilePic); // single: un solo campo un solo archivo
 // array: archivos distintos un solo campo
 // field: archivos distintos varios campos
+
+//router.post('/profilepic', uploadS3Middleware.single('image') , uploadProfilePic);
 // °En postman en Body  se pone form-data y e pone como campo el archivo
 export default router;
