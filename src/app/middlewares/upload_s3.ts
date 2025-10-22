@@ -28,7 +28,7 @@ const fileFilter = (req: Request, file: Express.Multer.File, callback: FileFilte
     callback(null, file.mimetype.startsWith('image/'));
 }
 
-export const uploadS3Middleware = new multer({
+export const uploadS3 = multer({
     storage,
     fileFilter
 })
