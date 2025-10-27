@@ -15,6 +15,9 @@ import { dbConnect } from './database';
 
 import { ejemplo } from './app/ejemplo2/ejemplo';
 import { index } from './app/ejemplo1';
+import { Server } from 'http';
+import { Server as socketServer } from 'socket.io';
+
 
 const PORT = process.env.PORT || 3000;
 
@@ -48,9 +51,20 @@ const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/swagger', serve, setup(swaggerDocs));
 
 dbConnect().then(() => {
-  app.listen(PORT, () => {
+  const server = app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
   });
+  
+  const io = new socketServer(server, {
+    cors: { 
+      origin: '*'
+    }
+  })
+
+  io.on('connection', (socket) => {
+    console.log('Se creo nueva conexion')
+  })
+
 }).catch(() => {
   console.log('Error al conectarse a la base de datos')
 })
